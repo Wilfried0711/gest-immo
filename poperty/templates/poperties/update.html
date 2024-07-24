@@ -1,0 +1,31 @@
+{% extends 'base.html' %} {% block title %} Modification des informations client {% endblock title %} {% block content %}
+<h3> Formulaire de mise a jour </h3>
+
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <li {% if message.poperties %} class="{{ message.poperties }}" {% endif %}>
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}Important: {% endif %} {{ message }}
+    </li>
+    {% endfor %}
+</ul>
+{% endif %} {% if messages %}
+<div class="alert alert-danger" role="alert">
+    <ul>
+        {% for message in messages %}
+        <li>
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endif %}
+
+<form method="POST" action="{% url 'update_poperty' poperty_to_update.id %}" enctype="multipart/form-data">
+    {% csrf_token %} {{ poperty_form.as_p }}
+
+    <button type="submit" class="btn btn-primary">update</button>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends 'base_template.html' %} {% load static %} {% block title %}Liste des Propriétés{% endblock title %} {% block content %}
+<div class="d-flex justify-content-between">
+    <a href="{% url 'create_poperty' %}" class="btn btn-sm btn-success">Créer une propriété</a>
+</div>
+
+{% if messages %}
+<div class="alert alert-{{ messages.0.tags }}">
+    {% for message in messages %} {{ message }} {% endfor %}
+</div>
+{% endif %}
+
+<div class="row">
+    <div class="col-12">
+        <div class="property-slider-wrap">
+            <div class="tns-outer" id="tns2-ow">
+                <div class="tns-nav" aria-label="Carousel Pagination">
+                    <button type="button" data-nav="0" aria-controls="tns2" aria-label="Carousel Page 1" tabindex="-1"></button>
+                    <button type="button" data-nav="1" aria-controls="tns2" aria-label="Carousel Page 2" tabindex="-1"></button>
+                    <button type="button" data-nav="2" aria-controls="tns2" aria-label="Carousel Page 3 (Current Slide)" class="tns-nav-active" tabindex="-1"></button>
+                </div>
+                <div class="tns-liveregion tns-visually-hidden" aria-live="polite" aria-atomic="true">slide <span class="current">1</span> of 3</div>
+                <div id="tns2-mw" class="tns-ovh">
+                    <div class="tns-inner" id="tns2-iw">
+                        <div class="property-slider tns-slider tns-carousel tns-subpixel tns-calc tns-horizontal" id="tns2" style="transform: translate3d(0%, 0px, 0px);">
+                            {% for poperty in poperties %}
+                            <div class="property-item tns-item" aria-hidden="false">
+                                <a href="property-single.html" class="img">
+                                    <img src="{% static 'images/img_7.jpg' %}" alt="Image" class="img-fluid">
+                                </a>
+                                <div class="price mb-2"><span>${{ poperty.price }}</span></div>
+                                <div>
+                                    <span class="d-block mb-2 text-black-50">{{ poperty.address }}</span>
+                                    <div class="specs d-flex mb-4">
+                                        <span class="d-block d-flex align-items-center me-3">
+                                            <span class="icon-bed me-2"></span>
+                                        <span class="caption">{{ poperty.beds }} beds</span>
+                                        </span>
+                                        <span class="d-block d-flex align-items-center me-3">
+                                            <span class="icon-bath me-2"></span>
+                                        <span class="caption">{{ poperty.baths }} baths</span>
+                                        </span>
+                                    </div>
+                                    <a href="poperty-single.html" class="btn btn-primary py-2 px-3">See details</a>
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="property-nav" class="controls" tabindex="0" aria-label="Carousel Navigation">
+                <span class="prev" data-controls="prev" aria-controls="tns2" tabindex="-1">Prev</span>
+                <span class="next" data-controls="next" aria-controls="tns2" tabindex="-1">Next</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
